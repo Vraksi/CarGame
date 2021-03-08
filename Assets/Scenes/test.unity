@@ -262,9 +262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 1685338475}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0.5, z: -1.15}
   followSpeed: 10
-  lookSpeed: 10
+  lookSpeed: 75
 --- !u!114 &282840816
 MonoBehaviour:
   m_ObjectHideFlags: 0
