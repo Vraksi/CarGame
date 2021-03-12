@@ -33,7 +33,9 @@ public class SimpleCarController : MonoBehaviour
 
 
     CheckpointSystem checkPointSystem;
-
+    private Vector3 lastCheckPointPos;
+    private Vector3 lastCheckPointVelocity;
+    private Quaternion lastCheckPointRot;
 
     private void Start()
     {
@@ -50,6 +52,7 @@ public class SimpleCarController : MonoBehaviour
         Brake();
         Accelerate();
         UpdateWheelPoses();
+        Unstuck();
         //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude); 
     }
 
@@ -130,6 +133,23 @@ public class SimpleCarController : MonoBehaviour
         _transform.position = _pos;
         _transform.rotation = _quat;
     }
+
+    public void Unstuck()
+    {
+        if (Input.GetKeyDown(KeyCode.R) == true)
+        {
+            if (lastCheckPointPos == new Vector3(0,0,0))
+            {
+                return;
+            }
+            else
+            {
+                transform.position = lastCheckPointPos;
+                GetComponent<Rigidbody>().velocity = lastCheckPointVelocity;
+                transform.rotation = lastCheckPointRot;
+            }            
+        }
+    }
     #endregion
 
     #region CheckpointSystem
@@ -137,25 +157,13 @@ public class SimpleCarController : MonoBehaviour
     {
         if (other.tag == "CheckPoint")
         {
-            checkPointSystem.hitCheckPoint();
+            checkPointSystem.hitCheckPoint(GetComponent<Rigidbody>().velocity.magnitude);
             other.gameObject.SetActive(false);
+            lastCheckPointPos = transform.position;
+            lastCheckPointVelocity = GetComponent<Rigidbody>().velocity;
+            lastCheckPointRot = transform.rotation;
             Debug.Log("A checkpoint");
         }
-
-        /*
-        if (other.tag == "StartCheckPoint")
-        {
-            Debug.Log("start");
-        }
-        else if (other.tag == "EndCheckPoint")
-        {
-            Debug.Log("End");
-        }
-        else if (other.tag == "CheckPoint")
-        {
-            Debug.Log("A checkpoint");
-        }
-        */
     }
     #endregion
 }
