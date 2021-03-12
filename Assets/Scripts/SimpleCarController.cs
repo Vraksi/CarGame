@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class SimpleCarController : MonoBehaviour
 {
-
     private float m_horizontalInput;
     private float m_verticalInput;
     private float m_steeringAngle;
-    [Header("WheelsComponents")]
-    [SerializeField] WheelCollider TopRightW, TopLeftW;
+
+    //TODO/BUG WheelsComponents header is showing up twice in the inspector 
+    [Header("WheelsComponents")]   
     [SerializeField] WheelCollider BottomRightW, BottomLeftW;
+    [SerializeField] WheelCollider TopRightW, TopLeftW;
     [SerializeField] Transform TopRightT, TopLeftT;
     [SerializeField] Transform BottomRightT, BottomLeftT;
-    
+
     [Header("Steering and Acceleration")]
     [SerializeField] float maxSteerAngle = 30;
     [SerializeField] float steerAngleDuringBraking = 60f;
-    private float currentSteeringAngle = 0f;
+    
     [SerializeField] float motorForce = 50;
     [SerializeField] float topSpeed = 30;
+    private float currentSteeringAngle = 0f;
 
     [Header("Braking")]
     [SerializeField] float braking = 300f;
@@ -30,28 +32,44 @@ public class SimpleCarController : MonoBehaviour
     private float brakes = 0f;
 
 
+    CheckpointSystem checkPointSystem;
+
+
     private void Start()
     {
         bR = BottomRightW.sidewaysFriction;
-        Debug.Log(bR.asymptoteSlip);
         bL = BottomLeftW.sidewaysFriction;
         currentSteeringAngle = maxSteerAngle;
+        checkPointSystem = FindObjectOfType<CheckpointSystem>();
     }
 
+    private void FixedUpdate()
+    {
+        GetInput();
+        Steer();
+        Brake();
+        Accelerate();
+        UpdateWheelPoses();
+        //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude); 
+    }
+
+    #region driving
     private void Brake()
     {
-        if (Input.GetKeyUp(KeyCode.Space) == true)
-        {
-            StiffnessModifier(sidewayNormalStiffness);
-            currentSteeringAngle = maxSteerAngle;
-            brakes = 0;
-        }
+        
         if (Input.GetKey(KeyCode.Space) == true)
         {
             currentSteeringAngle = steerAngleDuringBraking;
             brakes = braking;
             StiffnessModifier(sidewayBrakingStiffness);           
-        }        
+        }
+        //if (Input.GetKeyUp(KeyCode.Space) == true)
+        else
+        {
+            StiffnessModifier(sidewayNormalStiffness);
+            currentSteeringAngle = maxSteerAngle;
+            brakes = 0;
+        }
         //TopRightW.brakeTorque = brakes;
         //TopLeftW.brakeTorque = brakes;
         BottomRightW.brakeTorque = brakes;
@@ -60,8 +78,6 @@ public class SimpleCarController : MonoBehaviour
 
     private void StiffnessModifier(float stiffness)
     {
-        //bR = BottomRightW.sidewaysFriction;
-        //bL = BottomLeftW.sidewaysFriction;
         bR.stiffness = stiffness;
         bL.stiffness = stiffness;
         BottomRightW.sidewaysFriction = bR;
@@ -93,8 +109,7 @@ public class SimpleCarController : MonoBehaviour
         {
             TopLeftW.motorTorque = m_verticalInput * motorForce;
             TopRightW.motorTorque = m_verticalInput * motorForce;            
-        }
-             
+        }        
     }
 
     public void UpdateWheelPoses()
@@ -115,16 +130,32 @@ public class SimpleCarController : MonoBehaviour
         _transform.position = _pos;
         _transform.rotation = _quat;
     }
+    #endregion
 
-    private void FixedUpdate()
+    #region CheckpointSystem
+    private void OnTriggerEnter(Collider other)
     {
-        GetInput();
-        Steer();
-        Brake();
-        Accelerate();
-        UpdateWheelPoses();
-        
-        Debug.Log(GetComponent<Rigidbody>().velocity.magnitude); 
-    }
+        if (other.tag == "CheckPoint")
+        {
+            checkPointSystem.hitCheckPoint();
+            other.gameObject.SetActive(false);
+            Debug.Log("A checkpoint");
+        }
 
+        /*
+        if (other.tag == "StartCheckPoint")
+        {
+            Debug.Log("start");
+        }
+        else if (other.tag == "EndCheckPoint")
+        {
+            Debug.Log("End");
+        }
+        else if (other.tag == "CheckPoint")
+        {
+            Debug.Log("A checkpoint");
+        }
+        */
+    }
+    #endregion
 }
