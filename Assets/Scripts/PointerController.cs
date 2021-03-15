@@ -5,7 +5,8 @@ using UnityEngine;
 public class PointerController : MonoBehaviour
 {
     CheckpointSystem checkpointSystem;
-    private int currentCheckpoint = 0;
+    public int currentCheckpoint = 0;
+    private int maxCheckpoints = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,10 @@ public class PointerController : MonoBehaviour
 
     public void NextCheckpoint()
     {
+        if (currentCheckpoint + 1 >= checkpointSystem.checkPoints.Count)
+        {
+            gameObject.SetActive(false);            
+        }
         currentCheckpoint++;
     }
 }
