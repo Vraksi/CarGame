@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\YEABOIIIII\\Documents\\CarGame\\API\\API\\API.csproj": {}
+    "C:\\Users\\Vraksi\\GameMaking\\CarGame\\API\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\YEABOIIIII\\Documents\\CarGame\\API\\API\\API.csproj": {
+    "C:\\Users\\Vraksi\\GameMaking\\CarGame\\API\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\YEABOIIIII\\Documents\\CarGame\\API\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Vraksi\\GameMaking\\CarGame\\API\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\YEABOIIIII\\Documents\\CarGame\\API\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\YEABOIIIII\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\YEABOIIIII\\Documents\\CarGame\\API\\API\\obj\\",
+        "projectPath": "C:\\Users\\Vraksi\\GameMaking\\CarGame\\API\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Vraksi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vraksi\\GameMaking\\CarGame\\API\\API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\YEABOIIIII\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vraksi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -73,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }
