@@ -50,6 +50,10 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
+# Node.js Tools for Visual Studio
+.ntvs_analysis.dat
+node_modules/
+
 # Builds
 *.apk
 *.unitypackage
