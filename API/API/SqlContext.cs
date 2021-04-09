@@ -5,11 +5,16 @@ namespace API
 {
     public class SqlContext : DbContext
     {
+        public SqlContext(DbContextOptions<SqlContext> options)
+            : base(options)
+        {
+        }
         public DbSet<Highscore> Highscores { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = SamuraiAppData");
+            //optionsBuilder.UseSqlServer(
+              // "Data Source = DESKTOP-NRQ9U2N\\MSSQLSERVER2; Initial Catalog = HighScore; Trusted_Connection = True");
         }
     }
 }
