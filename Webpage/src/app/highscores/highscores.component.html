@@ -2,10 +2,15 @@
 <table class="table table-striped border mt-1">
   <thead>
     <tr>
-      <th scope="col">highscoreId</th>
-      <th scope="col">name</th>
-      <th scope="col">score</th>
+
+      <th scope="col" [appSort]="highscores" data-order="desc" data-name="name">Navn</th>
+      <th scope="col" [appSort]="highscores" data-order="desc" data-name="score">Score</th>
     </tr>
   </thead>
+  <tbody>
+    <tr *ngFor="let highscore of highscores">
+      <td>{{highscore.name}}</td>
+      <td>{{highscore.score}}</td>
+    </tr>
+  </tbody>
 </table>
-<router-outlet></router-outlet>

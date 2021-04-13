@@ -12,7 +12,7 @@ import { Highscore } from '../models/highscore';
 })
 export class HighscoreService {
 
-  private highscoreUrl = 'api/highscore';
+  private highscoreUrl = 'api/highscores';
   highscore: Highscore;
 
   httpOptions = {

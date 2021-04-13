@@ -8,11 +8,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HighscoresComponent } from './highscores/highscores.component';
+import { SortDirective } from './directive/sort.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HighscoresComponent
+    HighscoresComponent,
+    SortDirective
   ],
   imports: [
     BrowserModule,
